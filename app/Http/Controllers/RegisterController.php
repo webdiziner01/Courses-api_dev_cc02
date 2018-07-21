@@ -8,6 +8,10 @@ use App\Http\Requests\StoreUserRequest;
 
 use App\User;
 
+use App\Transformers\UserTransformer;
+use League\Fractal;
+
+use League\Fractal\Manager;
 class RegisterController extends Controller
 {
     public  function register(StoreUserRequest $request){
@@ -19,5 +23,15 @@ class RegisterController extends Controller
 
         $user->save();
 
+
+        return fractal()->item($user)->transformWith(new UserTransformer())->toArray();
+
+
+
+
     }
+
+
+
+
 }
