@@ -34,6 +34,17 @@ Route::group(['prefix' => 'topics'],function (){
     Route::put('/{topic}','TopicController@update')->middleware('auth:api');
     Route::delete('/{topic}','TopicController@destroy')->middleware('auth:api');
 
+
+    Route::group(['prefix' => '/{topic}/posts'],function (){
+       Route::post('/','PostController@store')->middleware('auth:api');
+       Route::patch('/{post}','PostController@update')->middleware('auth:api');
+       Route::delete('/{post}','PostController@destroy')->middleware('auth:api');
+
+
+    });
+
+
+
 });
 
 
