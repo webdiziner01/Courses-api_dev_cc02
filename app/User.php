@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Transformers\PostTransformer;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
@@ -36,6 +37,11 @@ class User extends Authenticatable
     public function avatar(){
         return 'https://www.gravatar.com/avatar/'.md5($this->email).'?s=45d=mm';
 }
+
+
+    public function hasLikedPost(Post $post){
+        return $post->likes->where('user_id',$this->id)->count() === 1;
+    }
 
     public function ownsTopic(Topic $topic){
         return $this->id === $topic->user->id;

@@ -22,8 +22,8 @@ Route::get('/test', function () {
     $post2 = new \App\Post();
     $post2 = $post2->find(2);
 
-    dd($post2->likes()->toSql());
-    dd($post->likes()->toSql());
+    dd($post2->likes->pluck('user'));
+    //dd($post->likes()->toSql());
 
 });
 
